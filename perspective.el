@@ -307,6 +307,8 @@ Create it if the current perspective doesn't have one yet."
     (unless scratch-buffer
       (setq scratch-buffer (get-buffer-create scratch-buffer-name))
       (with-current-buffer scratch-buffer
+        ;; We trust the content of an empty scratch buffer
+        (setq-local trusted-content :all)
         (when (eq major-mode 'fundamental-mode)
           (funcall initial-major-mode))
         (when (and (zerop (buffer-size))
